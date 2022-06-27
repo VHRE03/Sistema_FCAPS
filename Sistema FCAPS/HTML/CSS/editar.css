@@ -1,0 +1,30 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+/*FORMULARIO*/
+#formulario{
+    height: 50%;
+    width: 50%;
+    margin-top: 15%;
+    margin-left: 12.5%;
+    padding: 2%;
+}
+
+#formulario{
+    width: 50%;
+}
+
+.form-group{
+    margin-top: 2%;
+}
+
+#boton_aceptar{
+    margin-top: 4%;
+    width: 30%;
+}

@@ -1,0 +1,163 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+/*INFORMACION DE LA RED*/
+#informacion_red{
+    background-color: #262626;
+    height: 100%;
+    width: 20%;
+}
+
+#tabla_datos_switch{
+    width: 100%;
+    table-layout: fixed;
+}
+
+#img_switch{
+    margin-left: 30%;
+    width: 40%;
+    margin-top: 20%;
+}
+
+.text_info{
+    color: white;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.text_info2{
+    color: #007bff;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+#text_titulo{
+    margin-top: 15%;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+#chart_div{
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fecha{
+    /*background-color: aquamarine;*/
+    font-size: 16px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25%;
+}
+
+.v-line{
+    border-left: 1px solid whitesmoke;
+    height: 90%;
+    left: 20%;
+    margin-top: 2.5%;
+    margin-bottom: 5%;
+    position: absolute;
+}
+
+/*DISPOSITIVOS*/
+#dispositivos{
+    height: 100%;
+    width: 40%;
+}
+
+#icono{
+    width: 16%;
+    height: 12%;
+    margin-left: 60%;
+}
+
+#text_dispositivos{
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6%;
+}
+
+#tabla_dispositivos{
+    table-layout: fixed;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-collapse: collapse;
+}
+
+th{
+    padding: 2%;
+    text-align: left;
+}
+
+.v-line2{
+    border-left: 1px solid whitesmoke;
+    height: 90%;
+    left: 70%;
+    margin-top: 2.5%;
+    margin-bottom: 5%;
+    position: absolute;
+}
+
+#alerta_dispositivo_desconectado{
+    position: absolute;
+    bottom: 0;
+    width: 30%;
+    margin-left: 5%;
+}
+
+/*INFORMACION DE LOS DISPOSITIVOS*/
+#informacion_dispositivos{
+    background-color: white;
+    height: 100%;
+    width: 30%;
+}
+
+#botones_opciones{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10%;
+}
+
+#bot_opciones{
+    display: flex;
+    width: 30%;
+    justify-content: center;
+}
+
+#text_editar_dispositivo{
+    font-size: large;
+    display: flex;
+    justify-content: center;
+}
+
+#fomr_editar{
+    padding: 6%;
+    margin-top: 3%;
+}
+
+#botones_form{
+    margin-top: 5%;
+    margin-bottom: 0%;
+    display: flex;
+    justify-content: space-evenly;
+}

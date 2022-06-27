@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/CSS/style.css">
+    
+    <link rel="stylesheet" href="/CSS/barra_lateral.css">
+
+    <script>
+        function mostra_fecha(){
+            //FECHA Y HORA
+            var semana = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+            var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mato", "Junio", "Julio", "Agosto", "Septiembre", "octubre", "Noviembre", "Diciembre"]
+
+            var fecha = new Date();
+            var d = fecha.getDay();
+            var m = fecha.getMonth();
+            var anio = fecha.getFullYear();
+            var dia = semana[d];
+            var mes = meses[m];
+
+            var fecha_1 = document.createTextNode( dia + " " + m + " de " + mes + " del " + anio);
+            document.getElementById("fecha").appendChild(fecha_1);
+        }
+        
+        document.addEventListener('DOMContentLoaded', mostra_fecha, false)
+    </script>
+
+
+    <script>
+        
+        eel.expose(mostar_dispositivos);
+        function mostar_dispositivos(dispositivos){
+            let tabla = document.querySelector("#tabla_dispositivos");
+            tabla.innerHTML = "";
+
+            for (let i = 0; i < dispositivos.length; i++) {
+                var temp = document.createElement("tr");
+                var tem2 = document.createElement("th");
+                var tem3 = document.createElement("th");
+                var img = document.createElement("th");
+
+                var icono = document.createElement("img");
+                icono.id = "icono"
+                icono.src = "/Iconos/wifi.png"
+                img.appendChild(icono);
+
+                var but = document.createElement("button");
+                but.innerHTML = "Editar"
+                but.onclick = function mostrar(){
+                    mostar_caracteristicas_dispositivo(dispositivos[i]);
+                };
+                but.className = "btn btn-primary";
+                tem3.appendChild(but);
+                
+                
+                tem2.innerHTML = dispositivos[i][0];
+
+                temp.appendChild(img);
+                temp.appendChild(tem2);
+                temp.appendChild(tem3);
+                tabla.appendChild(temp);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', obtener_datos_switch, false)
+    </script>
+
+    <script>
+        function mostar_caracteristicas_dispositivo(dispositivo){
+            document.getElementById("fomr_editar").hidden = true;
+
+            document.getElementById("text_nom_dispositivo").hidden = false;
+            document.getElementById("nom_dispositivo").textContent = dispositivo[0];
+
+            document.getElementById("text_ip_dispositivo").hidden = false;
+            document.getElementById("ip_dispositivo").textContent = dispositivo[1];
+
+            document.getElementById("text_masc_dispositivo").hidden = false;
+            document.getElementById("masc_dispositivo").textContent = dispositivo[2];
+
+            var estado_dispositivo = dispositivo[3];
+            if (estado_dispositivo == "on") {
+                document.getElementById("text_est_dispositivo").hidden = false;
+                document.getElementById("est_dispositivo").textContent = "Conectado";
+            } else {
+                document.getElementById("text_est_dispositivo").hidden = false;
+                document.getElementById("est_dispositivo").textContent = "Desconectado";
+            }
+
+            document.getElementById("botones_opciones").hidden = false;
+            
+            recibir_info(dispositivo);
+        }
+    </script>
+
+    <script>
+        let disp
+        function recibir_info(dispositivo){
+            disp = dispositivo
+        }
+
+        function mostrar_alerta(){
+            document.getElementById("alerta_dispositivo_desconectado").hidden = false;
+            setTimeout(() => {
+                document.getElementById("alerta_dispositivo_desconectado").hidden = true;
+            }, 5000);
+        }
+
+        function mostar_editar(){
+            document.getElementById("fomr_editar").hidden = false;
+            document.getElementById("fomr_nom_dispositivo").value = disp[0]
+            document.getElementById("fomr_ip_dispositivo").value = disp[1]
+            document.getElementById("fomr_masc_dispositivo").value = disp[2]
+        }
+
+        function cancelar_editar(){
+            document.getElementById("fomr_editar").hidden = true;
+        }
+    </script>
+</head>
+<body>
+    <div id="barra_lateral">
+        <div >
+            <img id="img_usuario" src="/Iconos/usuario.png" alt="">
+        </div>
+
+        <div id="div_botones">
+            <a href="Inicio.html">
+                <button id="boton">Inicio</button>
+            </a>
+    
+            <a href="">
+                <button id="boton">Editar</button>
+            </a>
+
+            <a href="">
+                <button id="boton">Acceso</button>
+            </a>
+
+            <a href="">
+                <button id="boton">Acceso</button>
+            </a>
+        </div>
+    </div>
+
+    
+
+    <div class="v-line"></div>
+
+    DIPOSITIVOS
+    <div id="dispositivos">
+        <h1 id="text_dispositivos">Dispositivos conectados</h1>
+
+        <table id="tabla_dispositivos"></table>
+
+        <div>
+            <div class="alert alert-success" role="alert" id="alerta_dispositivo_conectado" hidden>
+                This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+            </div>
+
+            <div class="alert alert-success" role="alert" id="alerta_dispositivo_desconectado" hidden>
+                El dispostitivo se ha conectado
+            </div>
+        </div>
+    </div>
+    
+    <div class="v-line2"></div>
+
+    <div id="informacion_dispositivos">
+        <div>
+            <h1 class="text_info" id="text_nom_dispositivo" >Nombre del dispositivo</h1>
+            <h1 class="text_info2" id="nom_dispositivo"></h1>
+
+            <h1 class="text_info" id="text_ip_dispositivo" >Direción IP</h1>
+            <h1 class="text_info2" id="ip_dispositivo"></h1>
+
+            <h1 class="text_info" id="text_masc_dispositivo" >Mascara de subred</h1>
+            <h1 class="text_info2" id="masc_dispositivo"></h1>
+
+            <h1 class="text_info" id="text_est_dispositivo" >Estado del dispositivo</h1>
+            <h1 class="text_info2" id="est_dispositivo"></h1>
+
+            <div id="botones_opciones" >
+                <button type="button" class="btn btn-primary" id="bot_opciones" onclick="mostar_editar()">Editar</button>
+                <button type="button" class="btn btn-success" id="bot_opciones" onclick="mostrar_alerta()">Activar</button>
+            </div>
+        </div>
+
+        <form id="fomr_editar" >
+            <h1 id="text_editar_dispositivo">Actualizar informacion del dispositivo</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nombre del dispositivo</label>
+                <input type="text" class="form-control" id="fomr_nom_dispositivo" aria-describedby="emailHelp" placeholder="">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nombre del dispositivo</label>
+                <input type="text" class="form-control" id="fomr_ip_dispositivo" aria-describedby="emailHelp" placeholder="">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nombre del dispositivo</label>
+                <input type="text" class="form-control" id="fomr_masc_dispositivo" aria-describedby="emailHelp" placeholder="">
+            </div>
+
+            <div id="botones_form">
+                <button type="button" class="btn btn-primary" id="bot_opciones" onclick="">Guardar</button>
+                <button type="button" class="btn btn-danger" id="bot_opciones" onclick="cancelar_editar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    
+</body>
+
+</html>

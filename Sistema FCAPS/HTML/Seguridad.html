@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript" src="/eel.js"></script>
+
+    <link rel="stylesheet" href="/CSS/barra_lateral.css">
+    <link rel="stylesheet" href="/CSS/seguridad.css">
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', obtener_datos_switch, false)
+
+        function obtener_datos_switch(){
+            //var dispositivos = eel.leer_archivo();
+            eel.configuracion();
+        }
+        
+        eel.expose(mostra_conexiones);
+        function mostra_conexiones(conexiones){
+            let tabla1 = document.querySelector("#tabla_conexiones1");
+            tabla1.innerHTML = "";
+
+            for (let i = 0; i < conexiones.length; i++) {
+                var temp = document.createElement("tr");
+                var tem1 = document.createElement("td");
+                var tem2 = document.createElement("td");
+                var tem3 = document.createElement("td");
+                var tem4 = document.createElement("td");
+                var tem5 = document.createElement("td");
+                var tem6 = document.createElement("td");
+
+                tem2.innerHTML = conexiones[i][0];
+                tem3.innerHTML = conexiones[i][1];
+                tem4.innerHTML = conexiones[i][2];
+                
+                var conexion = conexiones[i][4];
+
+                var img = document.createElement("img");
+                if(conexion == "ON"){
+                    img.src = "/Iconos/si_conexion.png"
+                    var but = document.createElement("button");
+                    but.innerHTML = "Denegar acceso";
+                    but.onclick = function mostrar(){
+                        denegra_acceso(conexiones, i);
+                    };
+                    but.className = "btn btn-danger";
+                    tem1.appendChild(but);
+                }else{
+                    img.src = "/Iconos/no_conexion.png"
+                    var but = document.createElement("button");
+                    but.innerHTML = "Permitir acceso";
+                    but.onclick = function mostrar(){
+                        conceder_acceso(conexiones, i);
+                    };
+                    but.className = "btn btn-success";
+                    tem1.appendChild(but);
+                }
+                img.id = "img_estado"
+                tem5.appendChild(img);
+
+                var fecha = mostra_fecha();
+                tem6.innerHTML = fecha;
+                
+                temp.appendChild(tem1);
+                temp.appendChild(tem2);
+                temp.appendChild(tem3);
+                temp.appendChild(tem4);
+                temp.appendChild(tem6);
+                temp.appendChild(tem5);
+                tabla1.appendChild(temp);
+            }
+        }
+
+        function denegra_acceso(conexiones, num){
+            conexiones[num][4] = "OFF";
+            console.log(conexiones[num]);
+            mostra_conexiones(conexiones);
+        }
+
+        function conceder_acceso(conexiones, num){
+            conexiones[num][4] = "ON";
+            console.log(conexiones[num]);
+            mostra_conexiones(conexiones);
+        }
+
+        function mostra_fecha(){
+            //FECHA Y HORA
+            var semana = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+            var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mato", "Junio", "Julio", "Agosto", "Septiembre", "octubre", "Noviembre", "Diciembre"]
+
+            var fecha = new Date();
+            var d = fecha.getDay();
+            var m = fecha.getMonth();
+            var anio = fecha.getFullYear();
+            var dia = semana[d];
+            var mes = meses[m];
+
+            return fecha;
+        }
+
+    </script>
+
+</head>
+<body>
+    <div>
+
+    </div>
+    <!--BARRA LATERAL-->
+    <div id="barra_lateral">
+        <div >
+            <img id="img_usuario" src="/Iconos/usuario.png" alt="">
+        </div>
+
+        <div id="div_botones">
+            <a href="Inicio.html">
+                <button id="boton">Inicio</button>
+            </a>
+    
+            <a href="Editar.html">
+                <button id="boton">Editar</button>
+            </a>
+
+            <a href="Seguridad.html">
+                <button id="boton">Seguridad</button>
+            </a>
+        </div>
+    </div>
+    
+    <!--LISTA DE PUERTOS-->
+    <div id="lista_puertos">
+        <h1 id="titulo_lista_puertos">Lista control de accesos</h1>
+        <div id="div_tabla">
+            <table id="tabla_conexiones1"></table>
+        </div>
+    </div>
+</body>
+</html>

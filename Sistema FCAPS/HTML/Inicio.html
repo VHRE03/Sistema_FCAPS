@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript" src="/eel.js"></script>
+
+    <link rel="stylesheet" href="/CSS/barra_lateral.css">
+    <link rel="stylesheet" href="/CSS/inicio.css">
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', obtener_datos_switch, false)
+
+        function obtener_datos_switch(){
+            //var dispositivos = eel.leer_archivo();
+            eel.configuracion();
+        }
+
+        eel.expose(mostrar_datos_switch);
+        function mostrar_datos_switch(datos_switch){
+            console.log(datos_switch);
+            document.getElementById("nom_switch").textContent = datos_switch[0] +"/Cisco c3745";
+            document.getElementById("ip_switch").textContent = datos_switch[1];
+            document.getElementById("masc_switch").textContent = datos_switch[2];
+            document.getElementById("num_puertos").textContent = datos_switch[3];
+            document.getElementById("puertos_ocupados").textContent = datos_switch[4];
+
+            
+            if(datos_switch[5] == "enable"){
+                document.getElementById("estado1").hidden = false;
+                document.getElementById("img_estado").src = "/Iconos/enchufe2.png"
+            }else if(datos_switch[5] == "disable"){
+                document.getElementById("estado2").hidden = false;
+                document.getElementById("img_estado").src = "/Iconos/enchufe1.png"
+            }else if(datos_switch[5] == "pause"){
+                document.getElementById("estado3").hidden = false;
+                document.getElementById("img_estado").src = "/Iconos/enchufe3.png"
+            }
+            
+            valores_dsipositivos(datos_switch[3], datos_switch[4]);
+            uso_vlan(datos_switch[3], datos_switch[4]);
+        }
+
+        eel.expose(mostra_conexiones);
+        function mostra_conexiones(conexiones){
+            let tabla1 = document.querySelector("#tabla_conexiones1");
+            tabla1.innerHTML = "";
+
+            for (let i = 0; i < conexiones.length; i++) {
+                var temp = document.createElement("tr");
+                var tem2 = document.createElement("td");
+                var tem3 = document.createElement("td");
+                var tem4 = document.createElement("td");
+                var tem5 = document.createElement("td");
+
+                tem2.innerHTML = conexiones[i][0];
+                tem3.innerHTML = conexiones[i][1];
+                tem4.innerHTML = conexiones[i][2];
+                
+                var conexion = conexiones[i][4];
+
+                var img = document.createElement("img");
+                if(conexion == "ON"){
+                    img.src = "/Iconos/si_conexion.png"
+                }else{
+                    img.src = "/Iconos/no_conexion.png"
+                }
+                img.id = "img_estado"
+                tem5.appendChild(img);
+                
+                temp.appendChild(tem2);
+                temp.appendChild(tem3);
+                temp.appendChild(tem4);
+                temp.appendChild(tem5);
+                tabla1.appendChild(temp);
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <!--BARRA LATERAL-->
+    <div id="barra_lateral">
+        <div >
+            <img id="img_usuario" src="/Iconos/usuario.png" alt="">
+        </div>
+
+        <div id="div_botones">
+            <a href="Inicio.html">
+                <button id="boton">Inicio</button>
+            </a>
+    
+            <a href="Editar.html">
+                <button id="boton">Editar</button>
+            </a>
+
+            <a href="Seguridad.html">
+                <button id="boton">Seguridad</button>
+            </a>
+        </div>
+    </div>
+
+    <!--CONTENIDO-->
+    <div id="contenido">
+        <!--INFORMACION DEL DISPOSITIVO-->
+        <div id="info_dispositivo">
+            <img src="/Iconos/hub.png" id="img_disp" alt="">
+    
+            <table id="tabla_datos_dispositivo">
+                <tr>
+                    <td><h1 class="text_table">Nombre</h1></td>
+                    <td><h1 class="text_table2" id="nom_switch"></h1></td>
+                </tr>
+    
+                <tr>
+                    <td><h1 class="text_table">Direción IP</h1></td>
+                    <td><h1 class="text_table2" id="ip_switch"></h1></td>
+                </tr>
+    
+                <tr>
+                    <td><h1 class="text_table">Mascara de subred</h1></td>
+                    <td><h1 class="text_table2" id="masc_switch"></h1></td>
+                </tr>
+
+                <tr>
+                    <td><h1 class="text_table">Número de puertos</h1></td>
+                    <td><h1 class="text_table2" id="num_puertos"></h1></td>
+                </tr>
+
+                <tr>
+                    <td><h1 class="text_table">Puertos ocupados</h1></td>
+                    <td><h1 class="text_table2" id="puertos_ocupados"></h1></td>
+                </tr>
+
+                <tr>
+                    <td><h1 class="text_table">Estado</h1></td>
+                    <td>
+                        <img id="img_estado"alt="">
+                        <h1 class="text_table2" style="color: #00B74A;" id="estado1" hidden>Encendido</h1>
+                        <h1 class="text_table2" style="color: #F93154;" id="estado2" hidden>Apagado</h1>
+                        <h1 class="text_table2" style="color: #FFA900;" id="estado3" hidden>Pausa</h1>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="v-line"></div>
+
+        <!--GRAFICAS DE USO Y LISTA DE PUERTOS-->
+        <div id="graficas_puertos">
+            <!--GRAFICAS-->
+            <div id="graficas">
+                <div id="grafica_uso">
+                    <h1 class="titulos_graficas">Uso de la Vlan</h1>
+                    <canvas id="chart_uso"></canvas>
+                </div>
+    
+                <div id="grafica_conecciones">
+                    <h1 class="titulos_graficas">Uso de los puertos</h1>
+                    <canvas id="chart_con"></canvas>
+                </div> 
+            </div>
+
+            <!--LISTA DE PUERTOS-->
+            <div id="lista_puertos">
+                <h1 id="titulo_lista_puertos">Uso de los puertos</h1>
+                <div id="div_tabla">
+                    <table id="tabla_conexiones1"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var total_dispositivos;
+    var dispositivos_conectados;
+    function uso_vlan(num1, num2){
+        total_dispositivos = parseFloat(num1 * 100 / 16);
+        dispositivos_conectados =parseFloat(num2 * 100 / 16);
+
+        var xValues = ["Porcentaje libre de la Vlan","Porcentaje usado de la Vlan"];
+        var yValues = [total_dispositivos - dispositivos_conectados, dispositivos_conectados];
+        var barColors = [
+        "#1266F1","#F93154"
+        ];
+        
+        new Chart("chart_uso", {
+        type: "doughnut",
+        data: {
+            labels: xValues,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+            }]
+        }
+        });
+    }
+</script>
+
+<script>
+    var total_dispositivos;
+    var dispositivos_conectados;
+
+    function valores_dsipositivos(num1, num2){
+        total_dispositivos = parseInt(num1);
+        dispositivos_conectados = parseInt(num2);
+
+        console.log(total_dispositivos);
+        var xValues = ["Puertos libres", "Puertos utilizados"];
+        var yValues = [total_dispositivos - dispositivos_conectados, dispositivos_conectados];
+        var barColors = [
+        "#F93154","#1266F1"
+        ];
+        
+        new Chart("chart_con", {
+        type: "doughnut",
+        data: {
+            labels: xValues,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+            }]
+        }
+        });
+    }
+</script>
+</html>

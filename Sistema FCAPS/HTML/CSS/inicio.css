@@ -1,0 +1,135 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+/*CONTENIDO*/
+#contenido{
+    width: 80%;
+    display: flex;
+}
+
+/*INFORMACION DEL DISPOSITIVO*/
+#info_dispositivo{
+    width: 25%;
+}
+
+#img_disp{
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 55%;
+}
+
+#tabla_datos_dispositivo{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10%;
+    table-layout: fixed;
+}
+
+#tabla_datos_dispositivo td{
+    text-align: center;
+    padding: 2%;
+    height: 20%;
+}
+
+.text_table{
+    font-size: medium;
+}
+
+.text_table2{
+    font-size: medium;
+    color: #39C0ED;
+}
+
+.v-line{
+    border-left: 2px solid whitesmoke;
+    height: 90%;
+    left: 40%;
+    margin-top: 2.5%;
+    margin-bottom: 5%;
+    position: absolute;
+}
+
+/*GRAFICAS DE USO Y LISTA DE PUERTO*/
+#graficas_puertos{
+    width: 75%;
+}
+
+/*GRAFICAS*/
+#graficas{
+    display: flex;
+    height: 40%;
+}
+
+.titulos_graficas{
+    display: flex;
+    font-size: large;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+/*GRAFICA DE USO*/
+#grafica_uso{
+    width: 50%;
+}
+
+#chart_uso{
+    max-width: 80%;
+    max-height: 80%;
+    margin-left: 10%;
+}
+
+/*GRAFICA DE CONEXIONES*/
+#grafica_conecciones{
+    width: 50%;
+}
+
+#chart_con{
+    max-width: 80%;
+    max-height: 80%;
+    margin-left: 10%;
+}
+
+/*LISTA DE CONEXIONES*/
+#lista_puertos{
+    display: inline-block;
+    height: 60%;
+    width: 100%;
+}
+
+#titulo_lista_puertos{
+    display: flex;
+    font-size: large;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+#div_tabla{
+    width: 95%;
+    height: 85%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    overflow-y: scroll;
+    border: 1px solid whitesmoke;
+}
+
+#tabla_conexiones1{
+    width: 100%;
+    table-layout: fixed;
+}
+
+#tabla_conexiones1 td{
+    text-align: center;
+    padding: 2%;
+    height: 20%;
+}
+
+#img_estado{
+    width: 20%;
+}

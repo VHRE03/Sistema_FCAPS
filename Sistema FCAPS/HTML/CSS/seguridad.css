@@ -1,0 +1,51 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+/*LISTA DE CONEXIONES*/
+#lista_puertos{
+    display: inline-block;
+    height: 100%;
+    width: 80%;
+}
+
+#titulo_lista_puertos{
+    display: flex;
+    font-size: large;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+#div_tabla{
+    width: 95%;
+    height: 85%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    overflow-y: scroll;
+    border: 1px solid whitesmoke;
+}
+
+#tabla_conexiones1{
+    width: 100%;
+    table-layout: fixed;
+}
+
+#tabla_conexiones1 td{
+    text-align: center;
+    padding: 2%;
+    height: 20%;
+}
+
+#img_estado{
+    width: 20%;
+}
+
+#alerta{
+    background-color: orange;
+    margin-top: 5%;
+}

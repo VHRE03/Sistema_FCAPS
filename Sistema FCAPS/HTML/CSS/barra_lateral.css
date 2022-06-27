@@ -1,0 +1,43 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+#barra_lateral{
+    background-color: #262626;
+    width: 20%;
+    display: block;
+}
+
+#img_usuario{
+    width: 50%;
+    height: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 20%;
+    margin-bottom: 10%;
+}
+
+#div_botones{
+    height: 25%;
+    margin-top: 10%;
+}
+
+#boton{
+    font-size: x-large;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 25%;
+    color: white;
+    background-color: #262626;
+    border: 0px;
+}
+
+#div_botones a{
+    text-decoration: none;
+}
